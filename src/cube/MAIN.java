@@ -46,7 +46,7 @@ public class MAIN extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getSource() ==  button) {
-			System.out.println("Why is this not working");
+			System.out.println("Why is this not working correct");
 		}
 		System.out.println("lol");
 		
