@@ -6,5 +6,4 @@ The goal of this project is to find weak points in the real building to find out
 
 
 We use our CUBE software written in Java to read and display the output of a few sensors connected to an 
-arduino. Ich hab darauf grad keinen Bock
-
+arduino.
