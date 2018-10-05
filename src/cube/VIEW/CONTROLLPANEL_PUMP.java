@@ -28,10 +28,6 @@ public class CONTROLLPANEL_PUMP extends BJPanel {
 				super.getForeground());
 		control.setText("Heating");
 		super.add(control);
-
-		flowin = 6025;
-		flowout = 4065;
-
 	}
 
 	public void paintComponent(Graphics graphics) {

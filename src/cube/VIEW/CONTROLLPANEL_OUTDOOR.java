@@ -16,7 +16,6 @@ public class CONTROLLPANEL_OUTDOOR extends BJPanel {
 
 	CButton control;
 	private int temperature;
-	private double temp;
 
 	public CONTROLLPANEL_OUTDOOR(int x, int y, int width, int height, Color background, Color border, int roundness) {
 		super();
@@ -27,7 +26,6 @@ public class CONTROLLPANEL_OUTDOOR extends BJPanel {
 		super.setBordersize(1);
 		super.setRoundness(roundness);
 
-		temperature = 2465;
 	}
 
 	public void paintComponent(Graphics graphics) {
@@ -54,12 +52,13 @@ public class CONTROLLPANEL_OUTDOOR extends BJPanel {
 
 	public void setTemp(int temperature) {
 		this.temperature = temperature;
-		temp = temperature / 100;
 		repaint();
 	}
 
 	public int getTemp() {
 		return temperature;
 	}
+	
+	
 
 }

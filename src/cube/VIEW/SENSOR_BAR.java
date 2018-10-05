@@ -37,8 +37,6 @@ public class SENSOR_BAR extends BJPanel {
 			cb = new CBar(30, super.getHeight() / 2, super.getWidth() - 60, 20, 20, COLORS.humid, COLORS.humid2);
 			super.add(cb);
 		}
-
-		setData(250);
 	}
 
 	public void paintComponent(Graphics graphics) {

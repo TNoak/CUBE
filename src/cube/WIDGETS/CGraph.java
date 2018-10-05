@@ -27,7 +27,6 @@ public class CGraph extends JPanel {
 		super.setLayout(null);
 
 		this.sensortype = sensortype;
-		this.timePerMeasure = 7;
 
 		data = new int[1];
 	}

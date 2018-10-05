@@ -6,12 +6,12 @@ import cube.STATICS.COLORS;
 
 public class GUI_MAIN extends JFrame {
 
-	public SENSOR_MAIN[] senm;
+	SENSOR_MAIN[] senm;
 	CONTROLLPANEL_MAIN conm;
 	MENUE_MAIN menm;
 	ALLSENSORS_MAIN all;
 
-	public GUI_MAIN(int sensorCount) {
+	GUI_MAIN(int sensorCount, int time) {
 		super.setSize(1280, 720);
 		// super.setExtendedState(MAXIMIZED_BOTH);
 		super.setVisible(true);
@@ -23,7 +23,7 @@ public class GUI_MAIN extends JFrame {
 		senm = new SENSOR_MAIN[sensorCount];
 		for (int x = 0; x < sensorCount; x++) {
 			senm[x] = new SENSOR_MAIN(this, 20, super.getHeight() / 6 + 40, super.getHeight() / 6 * 9 - 30,
-					super.getHeight() / 6 * 5 - 100, COLORS.mainBackground, COLORS.greyLight, 30, x + 1);
+					super.getHeight() / 6 * 5 - 100, COLORS.mainBackground, COLORS.greyLight, 30, x + 1, time);
 			super.add(senm[x]);
 			senm[x].setVisible(false);
 		}
@@ -52,7 +52,20 @@ public class GUI_MAIN extends JFrame {
 		all.setVisible(true);
 	}
 
+	public void updateData(int sensor, int tick, int temp, int humid, int statusTemp, int statusHumid) {
+		// sensor: -1=outdoor; -2=flowin; -3=flowout
+
+		if (sensor > 0) {
+			senm[sensor].updateData(tick, temp, humid, statusTemp, statusHumid);
+			all.updateData(sensor, tick, temp, humid, statusTemp, statusHumid);
+		}
+
+		if (sensor < 0) {
+			conm.updateData(sensor, temp);
+		}
+	}
+
 	public static void main(String[] args) {
-		new GUI_MAIN(10);
+		new GUI_MAIN(10, 10);
 	}
 }
