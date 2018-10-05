@@ -1,27 +1,26 @@
-package cube;
+package cube.WIDGETS;
 
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 
-import javax.swing.JButton;
+import javax.swing.JLabel;
 
-public class CBar extends JButton {
+public class CBar extends JLabel {
 
 	private int width, height;
 	private int x, y;
-	private Color color;
+	private Color color,color2;
 	private int roundness;
 	private int pixellevel;
 	private double level;
 
 	public CBar() {
-		// TODO Auto-generated constructor stub
 		initialize();
 	}
 
-	public CBar(int x, int y, int width, int height, int roundness, Color color) {
+	public CBar(int x, int y, int width, int height, int roundness, Color color,Color color2) {
 
 		this.x = x;
 		this.y = y;
@@ -29,18 +28,20 @@ public class CBar extends JButton {
 		this.height = height;
 		this.roundness = roundness;
 		this.color = color;
+		this.color2=color2;
 
 		initialize();
 	}
 
 	void initialize() {
 		this.setBorder(null);
-		this.setFocusPainted(false);
 		this.setOpaque(false);
+
 	}
 
 	void generatePixelLevel(double level, int lenght) {
-		pixellevel = (int) (lenght * level / 100);
+		pixellevel = (int) (lenght * level);
+		System.out.println(pixellevel);
 	}
 
 	@Override
@@ -51,19 +52,12 @@ public class CBar extends JButton {
 
 		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-		g.setColor(color.darker());
+		g.setColor(color2);
 		g.fillRoundRect(0, 0, width, height, roundness, roundness);
 
 		g.setColor(color);
 		g.fillRoundRect(0, 0, pixellevel, height, roundness, roundness); // x, y müssen 0 sein da sonst das gezeichnete
 																			// sont außerhalb des Buttons liegt
-
-		if (this.getModel().isPressed()) {
-
-		} else if (this.getModel().isRollover()) {
-			g.setColor(color.brighter());
-			g.fillRoundRect(0, 0, width, height, roundness, roundness);
-		}
 
 	}
 
@@ -123,7 +117,8 @@ public class CBar extends JButton {
 
 	public void setLevel(double level) {
 		this.level = level;
-		generatePixelLevel(level, width);
+		generatePixelLevel(level, getWidth());
+		repaint();
 	}
 
 }

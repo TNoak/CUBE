@@ -1,75 +1,80 @@
-package cube;
+package cube.WIDGETS;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.geom.Rectangle2D;
 
 import javax.swing.JButton;
 
-public class CPanel extends JButton {
+import cube.STATICS.COLORS;
+
+public class CButton extends JButton {
 
 	private int width, height;
 	private int x, y;
-	private Color color;
-	private Color bordercolor;
+	private Color color, background;
 	private int roundness;
-	private int bordersize = 1;
 
-	public CPanel() {
-		// TODO Auto-generated constructor stub
-		initialize();
-	}
+	private String text;
 
-	public CPanel(int x, int y, int width, int height, int roundness, int bordersize, Color color, Color bordercolor) {
-
+	public CButton(int x, int y, int width, int height, int roundness, Color color, Color background) {
+		super();
 		this.x = x;
 		this.y = y;
 		this.width = width;
 		this.height = height;
 		this.roundness = roundness;
 		this.color = color;
-		this.bordercolor = bordercolor;
-		this.bordersize = bordersize;
-
-		initialize();
-	}
-	
-	public CPanel(int x, int y, int width, int height, int roundness, Color color, Color bordercolor) {
-
-		this.x = x;
-		this.y = y;
-		this.width = width;
-		this.height = height;
-		this.roundness = roundness;
-		this.color = color;
-		this.bordercolor = bordercolor;
-		this.bordersize = bordersize;
+		this.background = background;
+		text = "";
 
 		initialize();
 	}
 
 	void initialize() {
-		this.setBorder(null);
-		this.setFocusPainted(false);
-		this.setOpaque(false);
+		super.setBorder(null);
+		super.setFocusPainted(false);
+		super.setOpaque(false);
+		super.setVisible(true);
+		super.setBounds(this.x, this.y, this.width, this.height);
+		repaint();
 	}
 
-	@Override
 	protected void paintComponent(Graphics graphics) {
 		// TODO Auto-generated method stub
-
+		super.paintComponent(graphics);
 		Graphics2D g = (Graphics2D) graphics.create();
 
 		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
+		g.setColor(background);
+
+		g.fillRect(0, 0, width, height);
+
+		g.setColor(color);
+
 		g.fillRoundRect(0, 0, width, height, roundness, roundness);
 
-		g.setColor(bordercolor);
-		g.setStroke(new BasicStroke(bordersize));
-		g.drawRoundRect(0, 0, width - bordersize, height - bordersize, roundness,
-				roundness);
+		g.setColor(COLORS.white);
+
+		if (text != "exit") {
+			Font f = new Font("Arial", Font.BOLD, 20);
+			g.setFont(f);
+			FontMetrics m = g.getFontMetrics(g.getFont());
+			Rectangle2D r = m.getStringBounds(getText(), g);
+			g.drawString(getText(), (int) (super.getWidth() - r.getWidth()) / 2,
+					(int) ((super.getHeight() + r.getHeight()) / 2));
+		} else {
+			g.setStroke(new BasicStroke(4));
+			g.drawLine(roundness, roundness, getWidth()-roundness, getHeight()-roundness);
+			g.drawLine(roundness, getHeight()-roundness, getWidth()-roundness, roundness);
+		}
+
 	}
 
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Getters/Setters	
@@ -112,6 +117,7 @@ public class CPanel extends JButton {
 
 	public void setColor(Color color) {
 		this.color = color;
+		repaint();
 	}
 
 	public int getRoundness() {
@@ -122,20 +128,11 @@ public class CPanel extends JButton {
 		this.roundness = roundness;
 	}
 
-	public Color getBordercolor() {
-		return bordercolor;
+	public String getText() {
+		return text;
 	}
 
-	public void setBordercolor(Color bordercolor) {
-		this.bordercolor = bordercolor;
+	public void setText(String text) {
+		this.text = text;
 	}
-
-	public int getBordersize() {
-		return bordersize;
-	}
-
-	public void setBordersize(int bordersize) {
-		this.bordersize = bordersize;
-	}
-
 }
