@@ -48,5 +48,10 @@ public class ALLSENSORS_SINGLESENSOR extends BJPanel {
 	public int getNumber() {
 		return number;
 	}
+	
+	public void updateData(int t,int h) {	
+		temp.setData(t);
+		humid.setData(h);
+	}
 
 }

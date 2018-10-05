@@ -4,3 +4,6 @@ CUBE is a program written in Java that can read and write data over a serial por
 CUBE will be used to analyze a miniature rebuilt of a classroom by collecting data about its thermal structure. 
 The goal of this project is to find weak points in the real building to find out how you could improve temperature and humidity values.
 
+
+We use our CUBE software written in Java to read and display the output of a few sensors connected to an 
+arduino.
