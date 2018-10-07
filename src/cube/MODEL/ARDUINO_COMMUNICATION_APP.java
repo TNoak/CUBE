@@ -7,9 +7,12 @@ import java.util.concurrent.ThreadLocalRandom;
 import com.fazecast.jSerialComm.SerialPort;
 
 public class ARDUINO_COMMUNICATION_APP extends Thread{
+	MODEL_MAIN model;
+	String stringnumber;
 
-	public ARDUINO_COMMUNICATION_APP() {
+	public ARDUINO_COMMUNICATION_APP(MODEL_MAIN model) {
 		// TODO Auto-generated constructor stub
+		this.model = model;
 		this.start();
 	}
 	
@@ -49,7 +52,14 @@ public class ARDUINO_COMMUNICATION_APP extends Thread{
 					value = (data.nextLine());
 				} catch (Exception e) {
 				}
-				System.out.println(value);
+				//System.out.println(value);
+				stringnumber = value.substring(0,2);
+				//System.out.println(stringnumber);
+				int id = Integer.parseInt(stringnumber);
+				System.out.println(id);
+				if(id >= 0) {
+				model.sensor_app[id].newData(value);
+				}
 			}
 
 			if (false) {

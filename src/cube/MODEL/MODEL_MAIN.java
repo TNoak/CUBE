@@ -28,7 +28,7 @@ public class MODEL_MAIN {
 	}
 	
 	void createArduinoCommunicationApp() {
-		com_app = new ARDUINO_COMMUNICATION_APP();
+		com_app = new ARDUINO_COMMUNICATION_APP(this);
 	}
 	
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> GETTER/SETTER
