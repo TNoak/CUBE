@@ -27,8 +27,10 @@ void loop() {
       if (n < 10) {
         Serial.print(0);
         Serial.print(n);
+        Serial.print("t");
       } else {
         Serial.print(n);
+        Serial.print("t");
       }
 
       Serial.println(t);
@@ -40,8 +42,10 @@ void loop() {
       if (n < 10) {
         Serial.print(0);
         Serial.print(n);
+        Serial.print("h");
       } else {
         Serial.print(n);
+        Serial.print("h");
       }
 
       Serial.println(h);

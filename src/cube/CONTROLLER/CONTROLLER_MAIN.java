@@ -6,7 +6,7 @@ import cube.VIEW.GUI_MAIN;
 public class CONTROLLER_MAIN {
 	
 	int sensorcount = 10;
-	int intervall = 10;
+	int intervall = 3;
 
 	MODEL_MAIN model;
 	GUI_MAIN gui;

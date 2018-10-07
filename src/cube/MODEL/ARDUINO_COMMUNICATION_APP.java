@@ -12,6 +12,7 @@ public class ARDUINO_COMMUNICATION_APP extends Thread {
 	SerialPort serialPort;
 	Scanner scanner;
 
+	String rawStringValueAndDataType;
 	String rawStringValue;
 	String stringValueAndId;
 	String stringValue;
@@ -19,6 +20,7 @@ public class ARDUINO_COMMUNICATION_APP extends Thread {
 
 	int id;
 	int value;
+	char datatype;
 
 	public ARDUINO_COMMUNICATION_APP(MODEL_MAIN model) {
 		// TODO Auto-generated constructor stub
@@ -37,8 +39,11 @@ public class ARDUINO_COMMUNICATION_APP extends Thread {
 
 			System.out.println("");
 			System.out.println("Read: ");
-			rawStringValue = read();
-			System.out.println(rawStringValue);
+			rawStringValueAndDataType = read();
+			System.out.println(rawStringValueAndDataType);
+			System.out.println("processRawStringValueAndDataType: "); 
+			rawStringValue = processRawStringValueAndDataType(rawStringValueAndDataType);
+			System.out.println(rawStringValue);	
 			System.out.println("processToStringValueAndId: ");
 			stringValueAndId = processToStringValueAndId(rawStringValue);
 			System.out.println(stringValueAndId);
@@ -49,7 +54,11 @@ public class ARDUINO_COMMUNICATION_APP extends Thread {
 			stringID = processToStringId(stringValueAndId);
 			System.out.println(stringID);
 			System.out.println("giveDataToSensor: ");
-			giveDataToSensor(stringID, stringValue);
+			
+			
+			datatype = extractDataType(rawStringValueAndDataType);
+			
+			giveDataToSensor(stringID, stringValue, datatype);
 
 			// >>>>>>>>>>>>>>>>>>>>>>>>>>> writetoArduino
 			// if (false) {
@@ -60,19 +69,40 @@ public class ARDUINO_COMMUNICATION_APP extends Thread {
 
 	}
 
-	public void giveDataToSensor(String stringID, String stringValue) {
+	public char extractDataType(String rawStringValueAndDataType) {
+		if(rawStringValueAndDataType.indexOf('t') >= 0) {
+			return 't';
+		} else if(rawStringValueAndDataType.indexOf('h') >= 0) {
+			return 'h';
+		}
+		return 'n';
+	}
+
+	public void giveDataToSensor(String stringID, String stringValue, char datatype) {
 
 		if (stringID == "" || stringID == null || stringValue == "" || stringValue == null
-				|| stringValue.length() < 3) {
-			System.out.println("Ich mach nichts damit");
+				|| stringValue.length() < 3 || datatype == 'n') {
+			if(id + 1 <= model.sensorcount) {
+				model.sensor_app[id].newData(id + 1, 0, 'n', 1);
+			} else {
+				model.sensor_app[id].newData(0, 0, 'n', 1);
+			}
+			
 		} else {
 
 			id = Integer.parseInt(stringID);
 			System.out.println("ID: " + id);
 			value = Integer.parseInt(stringValue);
 			System.out.println("Value: " + value);
+			System.out.println("Datatype: " + datatype);
+			
+			if(id < model.sensorcount) {
+				model.sensor_app[id].newData(id, value, datatype, 0);
+			} else {
+				System.out.println("Too many sensors connected");
+			}
 
-			model.sensor_app[id].newData(id, value);
+			
 		}
 
 	}
@@ -102,6 +132,17 @@ public class ARDUINO_COMMUNICATION_APP extends Thread {
 			return null;
 		}
 
+	}
+
+	public String processRawStringValueAndDataType(String rawStringValueAndDataType) {
+		if (rawStringValueAndDataType != null && rawStringValueAndDataType.length() >= 7
+				&& rawStringValueAndDataType.length() <= 9) {
+			rawStringValueAndDataType = rawStringValueAndDataType.replace("t", "");
+			rawStringValueAndDataType = rawStringValueAndDataType.replace("h", "");
+			return rawStringValueAndDataType;
+		} else {
+			return null;
+		}
 	}
 
 	void setupCommunication() {

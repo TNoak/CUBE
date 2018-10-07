@@ -18,7 +18,7 @@ public class SENSOR_APP {
 	int statusHumid;
 
 	int t = 0;
-	
+
 	int[] read;
 	boolean firstvalue = true;
 
@@ -28,7 +28,7 @@ public class SENSOR_APP {
 		model = mm;
 		controller = model.getController();
 		read = new int[2];
-		updateData(id, 3, 300, 400, 0, 0); //nur temporär
+		updateData(id, 3, 300, 400, 0, 0); // nur temporär
 	}
 
 	public void updateData(int sensor, int tick, int temp, int humid, int statusTemp, int statusHumid) {
@@ -36,21 +36,22 @@ public class SENSOR_APP {
 		controller.updateData(sensor, tick, temp, humid, statusTemp, statusHumid);
 	}
 
-	public void newData(int id, int value) {
-		
-		if(firstvalue == true) {
+	public void newData(int id, int value, char datatype, int status) {
+
+		if (datatype == 't') {
 			temp = value;
-			firstvalue = false;
-		} else if(firstvalue == false){
+		} else if (datatype == 'h') {
 			humi = value;
-			firstvalue = true;
+		} else if(datatype == 'n') {
+			temp = 0;
+			humi = 0;
 		}
-		
-		
-		
+
 		read[0] = value;
 
-		updateData(id +1, 5, temp, humi, 0, 0); // +1 weg machen
+		updateData(id + 1, 5, temp, humi, status, status); // +1 weg machen
+		
+		tick++;
 
 	}
 
