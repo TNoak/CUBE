@@ -11,7 +11,7 @@ public class GUI_MAIN extends JFrame {
 	MENUE_MAIN menm;
 	ALLSENSORS_MAIN all;
 
-	GUI_MAIN(int sensorCount, int time) {
+	public GUI_MAIN(int sensorCount, int time) {
 		super.setSize(1280, 720);
 		// super.setExtendedState(MAXIMIZED_BOTH);
 		super.setVisible(true);

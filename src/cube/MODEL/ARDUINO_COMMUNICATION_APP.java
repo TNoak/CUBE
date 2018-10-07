@@ -41,12 +41,12 @@ public class ARDUINO_COMMUNICATION_APP extends Thread{
 		serialPort.setComPortTimeouts(SerialPort.TIMEOUT_SCANNER, 0, 0);
 
 		Scanner data = new Scanner(serialPort.getInputStream());
-		int value = 0;
+		String value = "";
 		while (true) {
 
 			if (data.hasNextLine()) {
 				try {
-					value = Integer.parseInt(data.nextLine());
+					value = (data.nextLine());
 				} catch (Exception e) {
 				}
 				System.out.println(value);
