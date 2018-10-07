@@ -16,16 +16,19 @@ public class SENSOR_APP {
 
 	int statusTemp;
 	int statusHumid;
-	
-	
+
 	int t = 0;
+	
+	int[] read;
+	boolean firstvalue = true;
 
 	public SENSOR_APP(int id, MODEL_MAIN mm) {
 		// TODO Auto-generated constructor stub
 		this.id = id;
 		model = mm;
 		controller = model.getController();
-		updateData(id, 3, 300, 400, 0, 0);
+		read = new int[2];
+		updateData(id, 3, 300, 400, 0, 0); //nur temporär
 	}
 
 	public void updateData(int sensor, int tick, int temp, int humid, int statusTemp, int statusHumid) {
@@ -33,20 +36,21 @@ public class SENSOR_APP {
 		controller.updateData(sensor, tick, temp, humid, statusTemp, statusHumid);
 	}
 
-	public void newData(String data) {
+	public void newData(int id, int value) {
 		
-		System.out.println(data);
-		String result = data.substring(2);
-		result = result.replace(".", "");
-		result = result.substring(0, result.length() - 1);
-		int res = Integer.parseInt(result);
-		System.out.println(result);
-		if (res >= 0) {
-			if(res <= 300) {
-				t = res;
-			}
-			updateData(id, 10, t, res, 0, 0);
+		if(firstvalue == true) {
+			temp = value;
+			firstvalue = false;
+		} else if(firstvalue == false){
+			humi = value;
+			firstvalue = true;
 		}
+		
+		
+		
+		read[0] = value;
+
+		updateData(id +1, 5, temp, humi, 0, 0); // +1 weg machen
 
 	}
 
