@@ -39,6 +39,11 @@ public abstract class BJPanel extends JPanel {
 		super.setSize(width, height);
 		repaint();
 	}
+	
+	public void setBounds(int x,int y ,int width,int height) {
+		super.setBounds(x, y, width, height);
+		repaint();
+	}
 
 	public int getHeight() {
 		return super.getHeight();

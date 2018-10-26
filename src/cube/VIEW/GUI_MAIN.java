@@ -10,15 +10,19 @@ public class GUI_MAIN extends JFrame {
 	CONTROLLPANEL_MAIN conm;
 	MENUE_MAIN menm;
 	ALLSENSORS_MAIN all;
+	
+	private int sensorCount;
 
 	GUI_MAIN(int sensorCount, int time) {
 		super.setSize(1280, 720);
-		// super.setExtendedState(MAXIMIZED_BOTH);
+		super.setExtendedState(MAXIMIZED_BOTH);
 		super.setVisible(true);
 		super.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		super.getContentPane().setBackground(COLORS.mainBackground);
 		super.setForeground(getBackground());
 		super.setLayout(null);
+		
+		this.sensorCount=sensorCount;
 
 		senm = new SENSOR_MAIN[sensorCount];
 		for (int x = 0; x < sensorCount; x++) {
@@ -40,22 +44,29 @@ public class GUI_MAIN extends JFrame {
 		menm = new MENUE_MAIN(super.getWidth(), super.getHeight() / 6);
 		super.add(menm);
 
+		showSensor(1);
+		showAllSens();
+		
 		repaint();
 
 	}
 
 	public void showSensor(int sens) {
 		senm[sens].setVisible(true);
+		all.setVisible(false);
 	}
 
 	public void showAllSens() {
 		all.setVisible(true);
+		for (int x = 0; x < sensorCount; x++) {
+			senm[x].setVisible(false);
+		}
 	}
 
 	public void updateData(int sensor, int tick, int temp, int humid, int statusTemp, int statusHumid) {
 		// sensor: -1=outdoor; -2=flowin; -3=flowout
 
-		if (sensor > 0) {
+		if (sensor >= 0) {
 			senm[sensor].updateData(tick, temp, humid, statusTemp, statusHumid);
 			all.updateData(sensor, tick, temp, humid, statusTemp, statusHumid);
 		}
@@ -66,6 +77,6 @@ public class GUI_MAIN extends JFrame {
 	}
 
 	public static void main(String[] args) {
-		new GUI_MAIN(10, 10);
+		new GUI_MAIN(14, 10);
 	}
 }

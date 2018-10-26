@@ -9,11 +9,13 @@ import java.awt.RenderingHints;
 import cube.STATICS.COLORS;
 import cube.WIDGETS.BJPanel;
 import cube.WIDGETS.CButton;
+import cube.WIDGETS.CText;
 
 public class CONTROLLPANEL_PUMP extends BJPanel {
 
 	CButton control;
 	private int flowin, flowout;
+	CText fin, fout;
 
 	public CONTROLLPANEL_PUMP(int x, int y, int width, int height, Color background, Color border, int roundness) {
 		super();
@@ -28,31 +30,26 @@ public class CONTROLLPANEL_PUMP extends BJPanel {
 				super.getForeground());
 		control.setText("Heating");
 		super.add(control);
-	}
 
-	public void paintComponent(Graphics graphics) {
-		super.paintComponent(graphics);
-		Graphics2D g = (Graphics2D) graphics.create();
-		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		fin = new CText(10, super.getHeight() / 5 * 3, super.getWidth() - 20, super.getHeight() / 5, "Flow IN:   --,-°C");
+		super.add(fin);
 
-		g.setColor(COLORS.white);
-
-		Font f = new Font("Arial", Font.BOLD, 14);
-
-		g.setFont(f);
-		g.drawString("Flow IN: " + Integer.toString(flowin / 100) + "," + Integer.toString(flowin - flowin / 100 * 100)
-				+ "°C", 10, super.getHeight() / 5 * 3);
-		g.drawString("Flow OUT: " + Integer.toString(flowout / 100) + ","
-				+ Integer.toString(flowout - flowout / 100 * 100) + "°C", 10, super.getHeight() / 5 * 4);
+		fout = new CText(10, super.getHeight() / 5 * 4, super.getWidth() - 20, super.getHeight() / 5,
+				"Flow OUT: --,-°C");
+		super.add(fout);
 	}
 
 	public void setFlowIn(int flowin) {
 		this.flowin = flowin;
+		fin.setText("Flow IN:   " + Integer.toString(flowin / 100) + "," + Integer.toString(flowin - flowin / 100 * 100)
+				+ "°C");
 		repaint();
 	}
 
 	public void setFlowOut(int flowout) {
 		this.flowout = flowout;
+		fout.setText("Flow OUT: " + Integer.toString(flowout / 100) + ","
+				+ Integer.toString(flowout - flowout / 100 * 100) + "°C");
 		repaint();
 	}
 

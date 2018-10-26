@@ -13,6 +13,7 @@ import java.awt.geom.Rectangle2D;
 import cube.STATICS.COLORS;
 import cube.WIDGETS.BJPanel;
 import cube.WIDGETS.CButton;
+import cube.WIDGETS.CText;
 
 public class SENSOR_MAIN extends BJPanel implements ActionListener {
 
@@ -22,11 +23,13 @@ public class SENSOR_MAIN extends BJPanel implements ActionListener {
 	SENSOR_BAR tempBar, humidBar;
 	CButton exit;
 	GUI_MAIN gui;
-	
-	int[] tempAr,humidAr;
+
+	CText tex;
+
+	int[] tempAr, humidAr;
 
 	public SENSOR_MAIN(GUI_MAIN gui, int x, int y, int width, int height, Color foreground, Color bordercolor,
-			int roundness, int sensorNummer,int time) {
+			int roundness, int sensorNummer, int time) {
 		super();
 		super.setSize(width, height);
 		super.setLocation(x, y);
@@ -40,9 +43,9 @@ public class SENSOR_MAIN extends BJPanel implements ActionListener {
 		this.gui = gui;
 
 		tempGr = new SENSOR_GRAPH(10, super.getHeight() / 2 - 10, super.getWidth() / 2 - 20, super.getHeight() / 2, 30,
-				COLORS.mainBackground, COLORS.greyLight, 1,time);
+				COLORS.mainBackground, COLORS.greyLight, 1, time);
 		humidGr = new SENSOR_GRAPH(super.getWidth() / 2 + 20, super.getHeight() / 2 - 10, super.getWidth() / 2 - 30,
-				super.getHeight() / 2, 30, COLORS.mainBackground, COLORS.greyLight, 2,time);
+				super.getHeight() / 2, 30, COLORS.mainBackground, COLORS.greyLight, 2, time);
 
 		tempSt = new SENSOR_STATUS(super.getWidth() / 2 - 15 - super.getWidth() / 6, super.getHeight() / 4 - 15,
 				super.getWidth() / 6, super.getHeight() / 4 - 30, 30, COLORS.mainBackground, COLORS.greyLight, 1);
@@ -54,7 +57,7 @@ public class SENSOR_MAIN extends BJPanel implements ActionListener {
 		humidBar = new SENSOR_BAR(super.getWidth() / 2 + 20, super.getHeight() / 4 - 15, super.getWidth() / 4,
 				super.getHeight() / 4 - 30, 30, COLORS.mainBackground, COLORS.greyLight, 2);
 
-		sensNum = new SENSOR_NUMMER(10, 10, super.getHeight() / 8 - 10, super.getHeight() / 8 - 10, 60,
+		sensNum = new SENSOR_NUMMER(10, 10, super.getHeight() / 8 - 10, super.getHeight() / 8 - 10,
 				COLORS.mainBackground, COLORS.greyLight, sensorNummer);
 
 		exit = new CButton(super.getWidth() - 40, 10, 30, 30, 5, COLORS.buttonRed, super.getForeground());
@@ -70,27 +73,14 @@ public class SENSOR_MAIN extends BJPanel implements ActionListener {
 		super.add(tempSt);
 		super.add(exit);
 
-		tempAr=new int[1];
-		humidAr=new int[1];
-		
+		tempAr = new int[1];
+		humidAr = new int[1];
+
+		tex = new CText(sensNum.getX() + sensNum.getWidth() + 10, sensNum.getY() ,
+				super.getWidth() / 2, sensNum.getHeight(), "Temperature & Humidity Sensor");
+		super.add(tex);
 	}
 
-	public void paintComponent(Graphics graphics) {
-		super.paintComponent(graphics);
-		Graphics2D g = (Graphics2D) graphics.create();
-		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
-		Font f = new Font("Arial", Font.BOLD, 25);
-		g.setFont(f);
-		g.setColor(COLORS.white);
-
-		FontMetrics m = g.getFontMetrics(getFont());
-		Rectangle2D r = m.getStringBounds("Temperature & Humidity Sensor", g);
-
-		g.drawString("Temperature & Humidity Sensor", sensNum.getX() + sensNum.getWidth() + 10,
-				(int) ((sensNum.getY() + sensNum.getHeight() + r.getHeight() + 10) / 2));
-
-	}
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == exit) {
@@ -103,29 +93,29 @@ public class SENSOR_MAIN extends BJPanel implements ActionListener {
 		super.setVisible(vis);
 	}
 
-	public void updateData(int tick,int temp,int humid,int statusTemp,int statusHumid) {
+	public void updateData(int tick, int temp, int humid, int statusTemp, int statusHumid) {
 		tempBar.setData(temp);
 		humidBar.setData(humid);
 
-		int[] temp1 = new int[tick+1];
-		for(int x=0;x<tempAr.length;x++) {
-			temp1[x]=tempAr[x];
+		int[] temp1 = new int[tick + 1];
+		for (int x = 0; x < tempAr.length; x++) {
+			temp1[x] = tempAr[x];
 		}
-		temp1[temp1.length-1]=temp;
-		tempAr=temp1;
-		
+		temp1[temp1.length - 1] = temp;
+		tempAr = temp1;
+
 		tempGr.setData(temp1);
-		int[] humid1 = new int[tick+1];
-		for(int x=0;x<humidAr.length;x++) {
-			humid1[x]=humidAr[x];
+		int[] humid1 = new int[tick + 1];
+		for (int x = 0; x < humidAr.length; x++) {
+			humid1[x] = humidAr[x];
 		}
-		humid1[humid1.length-1]=humid;
-		humidAr=humid1;
-		
+		humid1[humid1.length - 1] = humid;
+		humidAr = humid1;
+
 		humidGr.setData(humid1);
-		
-		setStatus(statusTemp,1);
-		setStatus(statusHumid,2);
+
+		setStatus(statusTemp, 1);
+		setStatus(statusHumid, 2);
 	}
 
 	public void setStatus(int status, int sensortype) {
