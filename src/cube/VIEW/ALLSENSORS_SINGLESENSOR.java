@@ -38,7 +38,7 @@ public class ALLSENSORS_SINGLESENSOR extends BJPanel {
 		super.add(humid);
 		super.add(temp);
 		super.add(but);
-
+		
 	}
 
 	public CButton getButton() {
@@ -52,6 +52,10 @@ public class ALLSENSORS_SINGLESENSOR extends BJPanel {
 	public void updateData(int t,int h) {	
 		temp.setData(t);
 		humid.setData(h);
+	}
+	
+	public void setBounds(int x,int y,int width,int height) {
+		super.setBounds(x, y, width, height);
 	}
 
 }
