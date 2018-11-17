@@ -55,7 +55,7 @@ public class GUI_MAIN extends JFrame {
 	public void updateData(int sensor, int tick, int temp, int humid, int statusTemp, int statusHumid) {
 		// sensor: -1=outdoor; -2=flowin; -3=flowout
 
-		if (sensor > 0) {
+		if (sensor >= 0) {
 			senm[sensor].updateData(tick, temp, humid, statusTemp, statusHumid);
 			all.updateData(sensor, tick, temp, humid, statusTemp, statusHumid);
 		}

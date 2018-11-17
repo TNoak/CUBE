@@ -12,15 +12,11 @@ public class ARDUINO_COMMUNICATION_APP extends Thread {
 	SerialPort serialPort;
 	Scanner scanner;
 
-	String rawStringValueAndDataType;
-	String rawStringValue;
-	String stringValueAndId;
-	String stringValue;
-	String stringID;
+	String message;
 
 	int id;
-	int value;
-	char datatype;
+	double valuetemp;
+	double valuehumi;
 
 	public ARDUINO_COMMUNICATION_APP(MODEL_MAIN model) {
 		// TODO Auto-generated constructor stub
@@ -36,112 +32,44 @@ public class ARDUINO_COMMUNICATION_APP extends Thread {
 		// TODO Auto-generated constructor stub
 		setupCommunication();
 		while (true) {
-
-			System.out.println("");
-			System.out.println("Read: ");
-			rawStringValueAndDataType = read();
-			System.out.println(rawStringValueAndDataType);
-			System.out.println("processRawStringValueAndDataType: "); 
-			rawStringValue = processRawStringValueAndDataType(rawStringValueAndDataType);
-			System.out.println(rawStringValue);	
-			System.out.println("processToStringValueAndId: ");
-			stringValueAndId = processToStringValueAndId(rawStringValue);
-			System.out.println(stringValueAndId);
-			System.out.println("processToStringValue: ");
-			stringValue = processToStringValue(stringValueAndId);
-			System.out.println(stringValue);
-			System.out.println("processToStringId: ");
-			stringID = processToStringId(stringValueAndId);
-			System.out.println(stringID);
-			System.out.println("giveDataToSensor: ");
-			
-			
-			datatype = extractDataType(rawStringValueAndDataType);
-			
-			giveDataToSensor(stringID, stringValue, datatype);
-
-			// >>>>>>>>>>>>>>>>>>>>>>>>>>> writetoArduino
-			// if (false) {
-			// serialWrite(ThreadLocalRandom.current().nextInt(0, 1 + 1));
-			// }
-			// >>>>>>>>>>>>>>>>>>>>>>>>>>>
+			message = "";
+			id = -1;
+			valuehumi = -1;
+			valuetemp = -1;
+			message = read();
+			System.out.println(message);
+			processString(message);
 		}
 
 	}
 
-	public char extractDataType(String rawStringValueAndDataType) {
-		if(rawStringValueAndDataType.indexOf('t') >= 0) {
-			return 't';
-		} else if(rawStringValueAndDataType.indexOf('h') >= 0) {
-			return 'h';
-		}
-		return 'n';
-	}
+	void processString(String message) {
+		if (message.length() >= 17 && message.length() <= 22) {
 
-	public void giveDataToSensor(String stringID, String stringValue, char datatype) {
-
-		if (stringID == "" || stringID == null || stringValue == "" || stringValue == null
-				|| stringValue.length() < 3 || datatype == 'n') {
-			if(id + 1 <= model.sensorcount) {
-				model.sensor_app[id].newData(id + 1, 0, 'n', 1);
-			} else {
-				model.sensor_app[id].newData(0, 0, 'n', 1);
-			}
-			
-		} else {
-
-			id = Integer.parseInt(stringID);
-			System.out.println("ID: " + id);
-			value = Integer.parseInt(stringValue);
-			System.out.println("Value: " + value);
-			System.out.println("Datatype: " + datatype);
-			
-			if(id < model.sensorcount) {
-				model.sensor_app[id].newData(id, value, datatype, 0);
-			} else {
-				System.out.println("Too many sensors connected");
+			try {
+				String stringnum = message.substring(message.indexOf("n") + 1, message.lastIndexOf("n"));
+				id = Integer.parseInt(stringnum);
+				System.out.println(id);
+				String stringtemp = message.substring(message.indexOf("t") + 1, message.lastIndexOf("t"));
+				valuetemp = Double.parseDouble(stringtemp);
+				System.out.println(valuetemp);
+				String stringhumi = message.substring(message.indexOf("h") + 1, message.lastIndexOf("h"));
+				valuehumi = Double.parseDouble(stringhumi);
+				System.out.println(valuehumi);
+			} catch (Exception e) {
+				// TODO: handle exception
+				System.out.println("Incorrect message!");
 			}
 
-			
-		}
-
-	}
-
-	public String processToStringValue(String stringValueAndId) { /////////////////////////////////////////////
-		if (stringValueAndId != null && stringValueAndId.length() >= 5 && stringValueAndId.length() <= 8) {
-			return stringValueAndId.substring(2);
+			try {
+				model.sensor_app[id].newData(id, valuetemp, valuehumi);
+			} catch (Exception e) {
+				// TODO: handle exception
+				System.out.println("Failed to wirte data to sensorapp!");
+			}
 		} else {
-			return null;
-		}
-	}
-
-	public String processToStringId(String stringValue) {
-		if (stringValueAndId != null && stringValueAndId.length() >= 3) {
-			return stringValue.substring(0, 2);
-		}
-		return null;
-	}
-
-	public String processToStringValueAndId(String rawStringValue) {
-
-		if (rawStringValue != null && rawStringValue.length() >= 6 && rawStringValue.length() <= 8) {
-			rawStringValue = rawStringValue.replace(".", "");
-			rawStringValue = rawStringValue.substring(0, rawStringValue.length() - 1);
-			return rawStringValue;
-		} else {
-			return null;
-		}
-
-	}
-
-	public String processRawStringValueAndDataType(String rawStringValueAndDataType) {
-		if (rawStringValueAndDataType != null && rawStringValueAndDataType.length() >= 7
-				&& rawStringValueAndDataType.length() <= 9) {
-			rawStringValueAndDataType = rawStringValueAndDataType.replace("t", "");
-			rawStringValueAndDataType = rawStringValueAndDataType.replace("h", "");
-			return rawStringValueAndDataType;
-		} else {
-			return null;
+			System.out.println("Message has incorrect length!");
+			return;
 		}
 	}
 
