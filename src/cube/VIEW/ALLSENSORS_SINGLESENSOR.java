@@ -2,6 +2,9 @@ package cube.VIEW;
 
 import java.awt.Color;
 
+import java.awt.FlowLayout;
+
+
 import cube.STATICS.COLORS;
 import cube.WIDGETS.BJPanel;
 import cube.WIDGETS.CButton;
@@ -23,7 +26,6 @@ public class ALLSENSORS_SINGLESENSOR extends BJPanel {
 		super.setBordersize(1);
 		super.setRoundness(roundness);
 		super.setLayout(null);
-		super.setVisible(true);
 
 		but = new CButton(10, 10, super.getHeight() - 20, super.getHeight() - 20, 10, COLORS.buttonSensor,
 				super.getForeground());
@@ -53,5 +55,11 @@ public class ALLSENSORS_SINGLESENSOR extends BJPanel {
 		temp.setData(t);
 		humid.setData(h);
 	}
+
+	
+	public void setBounds(int x,int y,int width,int height) {
+		super.setBounds(x, y, width, height);
+	}
+
 
 }

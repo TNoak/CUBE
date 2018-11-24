@@ -11,9 +11,15 @@ import java.awt.geom.Rectangle2D;
 import cube.STATICS.COLORS;
 import cube.WIDGETS.BJPanel;
 
+import cube.WIDGETS.CText;
+
+
 public class SENSOR_STATUS extends BJPanel {
 
 	private int status, sensortype;
+
+	CText stat, tex;
+
 
 	public SENSOR_STATUS(int x, int y, int width, int height, int roundness, Color foreground, Color border,
 			int sensortype) {
@@ -27,44 +33,27 @@ public class SENSOR_STATUS extends BJPanel {
 
 		status = 0;
 		this.sensortype = sensortype;
+
+
+		tex = new CText(10,10,super.getWidth()-20,super.getHeight()/2-20,"Sensor Status");
+		super.add(tex);
+
+		stat = new CText(10,super.getHeight()/2,super.getWidth()-20,super.getHeight()/2-20,"--");
+		super.add(stat);
 	}
 
-	public void paintComponent(Graphics graphics) {
-		super.paintComponent(graphics);
-		Graphics2D g = (Graphics2D) graphics.create();
-		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
-		Font f = new Font("Arial", Font.BOLD, 20);
-		g.setFont(f);
-
-		FontMetrics m = g.getFontMetrics(g.getFont());
-
-		Rectangle2D r = m.getStringBounds("Sensor Status", g);
-
-		g.setColor(COLORS.white);
-		g.drawString("Sensor Status", (int) ((super.getWidth() / 2) - (r.getWidth() / 2)), (int) (r.getHeight() + 5));
-
-		if (status == 0) {
-			g.setColor(COLORS.buttonGreen);
-			f = new Font("Arial", Font.BOLD, 30);
-			g.setFont(f);
-			m = g.getFontMetrics(g.getFont());
-			r = m.getStringBounds("OK", g);
-			g.drawString("OK", (int) (super.getWidth() - r.getWidth()) / 2,
-					(int) (super.getHeight() + r.getHeight()) / 2);
-		} else {
-			g.setColor(COLORS.buttonRed);
-			f = new Font("Arial", Font.BOLD, 30);
-			g.setFont(f);
-			m = g.getFontMetrics(g.getFont());
-			r = m.getStringBounds("FEHLER", g);
-			g.drawString("FEHLER", (int) (super.getWidth() - r.getWidth()) / 2,
-					(int) (super.getHeight() + r.getHeight()) / 2);
-		}
-	}
 
 	public void setStatus(int status) {
 		this.status = status;
+		switch (status) {
+		case 1:
+			stat.setText("OK");
+			stat.setColor(COLORS.buttonGreen);
+		case 2:
+			stat.setText("FEHLER");
+			stat.setColor(COLORS.buttonRed);
+		}
+
 	}
 
 	public int getStatus() {
