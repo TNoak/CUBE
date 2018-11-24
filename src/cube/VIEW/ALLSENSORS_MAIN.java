@@ -1,6 +1,7 @@
 package cube.VIEW;
 
 import java.awt.Color;
+
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -8,6 +9,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+
 
 import cube.STATICS.COLORS;
 import cube.WIDGETS.BJPanel;
@@ -17,6 +19,7 @@ public class ALLSENSORS_MAIN extends BJPanel implements ActionListener {
 	ALLSENSORS_SINGLESENSOR[] sens;
 	GUI_MAIN gui;
 	int sensorCount;
+
 	JScrollPane scrollPane;
 	JPanel panel, pan;
 
@@ -57,11 +60,13 @@ public class ALLSENSORS_MAIN extends BJPanel implements ActionListener {
 		scrollPane.setBackground(foregroundcolor);
 		scrollPane.setBorder(null);
 
+
 		this.sensorCount = sensorCount;
 		this.gui = gui;
 
 		sens = new ALLSENSORS_SINGLESENSOR[sensorCount];
 		for (int x1 = 0; x1 < sensorCount; x1++) {
+
 
 			sens[x1] = new ALLSENSORS_SINGLESENSOR(0, 0, (panel.getWidth() / 2 - 5), ((height - 20) / 5) - 5,
 					COLORS.mainBackground, COLORS.greyLight, 10, x1);
@@ -70,6 +75,7 @@ public class ALLSENSORS_MAIN extends BJPanel implements ActionListener {
 			sens[x1].getButton().addActionListener(this);
 		}
 		super.add(scrollPane);
+
 	}
 
 	public void setVisible(boolean vis) {
@@ -86,8 +92,10 @@ public class ALLSENSORS_MAIN extends BJPanel implements ActionListener {
 		}
 	}
 
+
 	public void updateData(int sensor, int tick, int temp, int humid, int statusTemp, int statusHumid) {
 		sens[sensor].updateData(temp, humid);
 	}
+
 
 }

@@ -63,6 +63,7 @@ public class CButton extends JButton {
 		g.setColor(COLORS.white);
 
 		if (text != "exit") {
+
 			for (int x = 40; x > 5; x--) {
 				Font f = new Font("Arial", Font.BOLD, x);
 				g.setFont(f);
@@ -74,6 +75,7 @@ public class CButton extends JButton {
 					break;
 				}
 			}
+
 		} else {
 			g.setStroke(new BasicStroke(4));
 			g.drawLine(roundness, roundness, getWidth()-roundness, getHeight()-roundness);

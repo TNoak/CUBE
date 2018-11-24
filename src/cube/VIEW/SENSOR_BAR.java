@@ -11,14 +11,18 @@ import java.awt.geom.Rectangle2D;
 import cube.STATICS.COLORS;
 import cube.WIDGETS.BJPanel;
 import cube.WIDGETS.CBar;
+
 import cube.WIDGETS.CText;
+
 
 public class SENSOR_BAR extends BJPanel {
 
 	private int sensortype;
 	private int data;
 	CBar cb;
+
 	CText ct;
+
 
 	public SENSOR_BAR(int x, int y, int width, int height, int roundness, Color foreground, Color border,
 			int sensortype) {
@@ -29,8 +33,10 @@ public class SENSOR_BAR extends BJPanel {
 		super.setBordercolor(border);
 		super.setBordersize(1);
 		super.setRoundness(roundness);
+
 		super.setLayout(null);
 		super.setVisible(true);
+
 
 		this.sensortype = sensortype;
 
@@ -38,7 +44,8 @@ public class SENSOR_BAR extends BJPanel {
 			cb = new CBar(30, super.getHeight() / 2, super.getWidth() - 60, 20, 20, COLORS.temp, COLORS.temp2);
 			super.add(cb);
 
-			ct = new CText(10, 5, super.getWidth() - 20, super.getHeight() / 2 - 10, "Temperature: --,-°C");
+
+			ct = new CText(10, 5, super.getWidth() - 20, super.getHeight() / 2 - 10, "Temperature: --,-Â°C");
 			super.add(ct);
 		} else {
 			cb = new CBar(30, super.getHeight() / 2, super.getWidth() - 60, 20, 20, COLORS.humid, COLORS.humid2);
@@ -47,6 +54,7 @@ public class SENSOR_BAR extends BJPanel {
 			ct = new CText(10, 5, super.getWidth() - 20, super.getHeight() / 2 - 10, "Humidity: --,-%");
 			super.add(ct);
 		
+
 		}
 	}
 
@@ -54,13 +62,15 @@ public class SENSOR_BAR extends BJPanel {
 		this.data = data;
 		if (sensortype == 2) {
 			cb.setLevel((double) data / 1000);
+
 			ct.setText("Temperature: " + Integer.toString(data / 10) + "," + Integer.toString(data - data / 10 * 10)
-					+ "°C");
+					+ "Â°C");
 		} else {
 			cb.setLevel((double) data / 350);
 			ct.setText(
 					"Humidity: " + Integer.toString(data / 10) + "," + Integer.toString(data - data / 10 * 10) + "%");
 		}
+
 	}
 
 }

@@ -13,7 +13,9 @@ import java.awt.geom.Rectangle2D;
 import cube.STATICS.COLORS;
 import cube.WIDGETS.BJPanel;
 import cube.WIDGETS.CButton;
+
 import cube.WIDGETS.CText;
+
 
 public class SENSOR_MAIN extends BJPanel implements ActionListener {
 
@@ -24,12 +26,14 @@ public class SENSOR_MAIN extends BJPanel implements ActionListener {
 	CButton exit;
 	GUI_MAIN gui;
 
+
 	CText tex;
 
 	int[] tempAr, humidAr;
 
 	public SENSOR_MAIN(GUI_MAIN gui, int x, int y, int width, int height, Color foreground, Color bordercolor,
 			int roundness, int sensorNummer, int time) {
+
 		super();
 		super.setSize(width, height);
 		super.setLocation(x, y);
@@ -43,9 +47,11 @@ public class SENSOR_MAIN extends BJPanel implements ActionListener {
 		this.gui = gui;
 
 		tempGr = new SENSOR_GRAPH(10, super.getHeight() / 2 - 10, super.getWidth() / 2 - 20, super.getHeight() / 2, 30,
+
 				COLORS.mainBackground, COLORS.greyLight, 1, time);
 		humidGr = new SENSOR_GRAPH(super.getWidth() / 2 + 20, super.getHeight() / 2 - 10, super.getWidth() / 2 - 30,
 				super.getHeight() / 2, 30, COLORS.mainBackground, COLORS.greyLight, 2, time);
+
 
 		tempSt = new SENSOR_STATUS(super.getWidth() / 2 - 15 - super.getWidth() / 6, super.getHeight() / 4 - 15,
 				super.getWidth() / 6, super.getHeight() / 4 - 30, 30, COLORS.mainBackground, COLORS.greyLight, 1);
@@ -58,6 +64,7 @@ public class SENSOR_MAIN extends BJPanel implements ActionListener {
 				super.getHeight() / 4 - 30, 30, COLORS.mainBackground, COLORS.greyLight, 2);
 
 		sensNum = new SENSOR_NUMMER(10, 10, super.getHeight() / 8 - 10, super.getHeight() / 8 - 10,
+
 				COLORS.mainBackground, COLORS.greyLight, sensorNummer);
 
 		exit = new CButton(super.getWidth() - 40, 10, 30, 30, 5, COLORS.buttonRed, super.getForeground());
@@ -73,6 +80,7 @@ public class SENSOR_MAIN extends BJPanel implements ActionListener {
 		super.add(tempSt);
 		super.add(exit);
 
+
 		tempAr = new int[1];
 		humidAr = new int[1];
 
@@ -80,6 +88,7 @@ public class SENSOR_MAIN extends BJPanel implements ActionListener {
 				super.getWidth() / 2, sensNum.getHeight(), "Temperature & Humidity Sensor");
 		super.add(tex);
 	}
+
 
 
 	public void actionPerformed(ActionEvent e) {
@@ -92,6 +101,7 @@ public class SENSOR_MAIN extends BJPanel implements ActionListener {
 	public void setVisible(boolean vis) {
 		super.setVisible(vis);
 	}
+
 
 	public void updateData(int tick, int temp, int humid, int statusTemp, int statusHumid) {
 		tempBar.setData(temp);
@@ -116,6 +126,7 @@ public class SENSOR_MAIN extends BJPanel implements ActionListener {
 
 		setStatus(statusTemp, 1);
 		setStatus(statusHumid, 2);
+
 	}
 
 	public void setStatus(int status, int sensortype) {

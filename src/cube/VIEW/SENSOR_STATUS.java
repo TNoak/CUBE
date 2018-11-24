@@ -10,12 +10,16 @@ import java.awt.geom.Rectangle2D;
 
 import cube.STATICS.COLORS;
 import cube.WIDGETS.BJPanel;
+
 import cube.WIDGETS.CText;
+
 
 public class SENSOR_STATUS extends BJPanel {
 
 	private int status, sensortype;
+
 	CText stat, tex;
+
 
 	public SENSOR_STATUS(int x, int y, int width, int height, int roundness, Color foreground, Color border,
 			int sensortype) {
@@ -29,6 +33,7 @@ public class SENSOR_STATUS extends BJPanel {
 
 		status = 0;
 		this.sensortype = sensortype;
+
 
 		tex = new CText(10,10,super.getWidth()-20,super.getHeight()/2-20,"Sensor Status");
 		super.add(tex);
@@ -48,6 +53,7 @@ public class SENSOR_STATUS extends BJPanel {
 			stat.setText("FEHLER");
 			stat.setColor(COLORS.buttonRed);
 		}
+
 	}
 
 	public int getStatus() {

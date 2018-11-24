@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import cube.STATICS.COLORS;
 import cube.WIDGETS.BJPanel;
 import cube.WIDGETS.CButton;
+
 import cube.WIDGETS.CText;
 
 public class CONTROLLPANEL_MAIN extends BJPanel implements ActionListener {
@@ -17,6 +18,7 @@ public class CONTROLLPANEL_MAIN extends BJPanel implements ActionListener {
 	CONTROLLPANEL_OUTDOOR outdoor;
 	boolean pumpOnOff, lightsOnOff, startOnOff, windowTopOnOff, windowDownOnOff;
 
+
 	public CONTROLLPANEL_MAIN(int x, int y, int width, int height, Color background) {
 		super();
 		super.setSize(width, height);
@@ -25,6 +27,7 @@ public class CONTROLLPANEL_MAIN extends BJPanel implements ActionListener {
 		super.setBordercolor(background);
 		super.setBordersize(0);
 		super.setRoundness(30);
+
 
 		window = new CText(10, 10, ((super.getWidth() - 20)/3)*2, super.getHeight() / 8, "Windows: ");
 		super.add(window);
@@ -42,6 +45,7 @@ public class CONTROLLPANEL_MAIN extends BJPanel implements ActionListener {
 		windowDown.addActionListener(this);
 		super.add(windowDown);
 		windowDownOnOff = false;
+
 
 		lights = new CButton(10, super.getHeight() / 8 + 20, super.getWidth() - 20, super.getHeight() / 8, 10,
 				COLORS.buttonRed, background);
@@ -100,6 +104,7 @@ public class CONTROLLPANEL_MAIN extends BJPanel implements ActionListener {
 			lightsOnOff = !lightsOnOff;
 		}
 
+
 		if (e.getSource() == windowTop) {
 			if (windowTopOnOff) {
 				windowTop.setColor(COLORS.buttonRed);
@@ -116,6 +121,7 @@ public class CONTROLLPANEL_MAIN extends BJPanel implements ActionListener {
 				windowDown.setColor(COLORS.buttonGreen);
 			}
 			windowDownOnOff = !windowDownOnOff;
+
 		}
 
 	}
@@ -133,5 +139,6 @@ public class CONTROLLPANEL_MAIN extends BJPanel implements ActionListener {
 		}
 
 	}
+
 
 }

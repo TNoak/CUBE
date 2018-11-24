@@ -11,13 +11,17 @@ import java.awt.geom.Rectangle2D;
 import cube.STATICS.COLORS;
 import cube.WIDGETS.BJPanel;
 import cube.WIDGETS.CButton;
+
 import cube.WIDGETS.CText;
+
 
 public class CONTROLLPANEL_OUTDOOR extends BJPanel {
 
 	CButton control;
 	private int temperature;
+
 	CText text1, text2;
+
 
 	public CONTROLLPANEL_OUTDOOR(int x, int y, int width, int height, Color background, Color border, int roundness) {
 		super();
@@ -28,21 +32,26 @@ public class CONTROLLPANEL_OUTDOOR extends BJPanel {
 		super.setBordersize(1);
 		super.setRoundness(roundness);
 
+
 		text1 = new CText(10, 10, width - 20, height / 2 - 20, "Outdoor Temp.");
 		super.add(text1);
-		text2 = new CText(super.getWidth()/4, super.getHeight() / 2, super.getWidth()/2, super.getHeight() / 2 - 20, "--,-°C");
+		text2 = new CText(super.getWidth()/4, super.getHeight() / 2, super.getWidth()/2, super.getHeight() / 2 - 20, "--,-Â°C");
 		super.add(text2);
+
 	}
 
 	public void setTemp(int temperature) {
 		this.temperature = temperature;
+
 		text2.setText(Integer.toString(temperature / 100) + ","
-				+ Integer.toString(temperature - temperature / 100 * 100) + "°C");
+				+ Integer.toString(temperature - temperature / 100 * 100) + "Â°C");
+
 		repaint();
 	}
 
 	public int getTemp() {
 		return temperature;
 	}
+
 
 }
