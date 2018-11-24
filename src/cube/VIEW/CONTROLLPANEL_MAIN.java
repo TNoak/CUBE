@@ -7,13 +7,15 @@ import java.awt.event.ActionListener;
 import cube.STATICS.COLORS;
 import cube.WIDGETS.BJPanel;
 import cube.WIDGETS.CButton;
+import cube.WIDGETS.CText;
 
 public class CONTROLLPANEL_MAIN extends BJPanel implements ActionListener {
 
-	CButton window, lights, startStop;
+	CButton windowTop,windowDown, lights, startStop;
+	CText window;
 	CONTROLLPANEL_PUMP pump;
 	CONTROLLPANEL_OUTDOOR outdoor;
-	boolean pumpOnOff, lightsOnOff, startOnOff, windowOnOff;
+	boolean pumpOnOff, lightsOnOff, startOnOff, windowTopOnOff, windowDownOnOff;
 
 	public CONTROLLPANEL_MAIN(int x, int y, int width, int height, Color background) {
 		super();
@@ -24,11 +26,22 @@ public class CONTROLLPANEL_MAIN extends BJPanel implements ActionListener {
 		super.setBordersize(0);
 		super.setRoundness(30);
 
-		window = new CButton(10, 10, super.getWidth() - 20, super.getHeight() / 8, 10, COLORS.buttonRed, background);
-		window.setText("Windows");
-		window.addActionListener(this);
+		window = new CText(10, 10, ((super.getWidth() - 20)/3)*2, super.getHeight() / 8, "Windows: ");
 		super.add(window);
-		windowOnOff = false;
+		
+		windowTop=new CButton(((super.getWidth() - 20)/3)*2+5, 10, ((super.getWidth() - 20)/3), super.getHeight() / 16, 10,
+				COLORS.buttonRed, background);
+		windowTop.setText("Top");
+		windowTop.addActionListener(this);
+		super.add(windowTop);
+		windowTopOnOff = false;
+		
+		windowDown=new CButton(((super.getWidth() - 20)/3)*2+5, 15+windowTop.getHeight(), ((super.getWidth() - 20)/3), super.getHeight() / 16, 10,
+				COLORS.buttonRed, background);
+		windowDown.setText("Bottom");
+		windowDown.addActionListener(this);
+		super.add(windowDown);
+		windowDownOnOff = false;
 
 		lights = new CButton(10, super.getHeight() / 8 + 20, super.getWidth() - 20, super.getHeight() / 8, 10,
 				COLORS.buttonRed, background);
@@ -87,13 +100,22 @@ public class CONTROLLPANEL_MAIN extends BJPanel implements ActionListener {
 			lightsOnOff = !lightsOnOff;
 		}
 
-		if (e.getSource() == window) {
-			if (windowOnOff) {
-				window.setColor(COLORS.buttonRed);
+		if (e.getSource() == windowTop) {
+			if (windowTopOnOff) {
+				windowTop.setColor(COLORS.buttonRed);
 			} else {
-				window.setColor(COLORS.buttonGreen);
+				windowTop.setColor(COLORS.buttonGreen);
 			}
-			windowOnOff = !windowOnOff;
+			windowTopOnOff = !windowTopOnOff;
+		}
+		
+		if (e.getSource() == windowDown) {
+			if (windowDownOnOff) {
+				windowDown.setColor(COLORS.buttonRed);
+			} else {
+				windowDown.setColor(COLORS.buttonGreen);
+			}
+			windowDownOnOff = !windowDownOnOff;
 		}
 
 	}

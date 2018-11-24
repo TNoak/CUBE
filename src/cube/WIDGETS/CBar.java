@@ -39,7 +39,7 @@ public class CBar extends JLabel {
 
 	}
 
-	void generatePixelLevel(double level, int lenght) {
+	void generatePixelLevel(double level, int lenght) {//level in %
 		pixellevel = (int) (lenght * level);
 	}
 

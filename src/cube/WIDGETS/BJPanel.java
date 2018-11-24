@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.LayoutManager;
 import java.awt.RenderingHints;
 
 import javax.swing.JPanel;
@@ -37,6 +38,11 @@ public abstract class BJPanel extends JPanel {
 
 	public void setSize(int width, int height) {
 		super.setSize(width, height);
+		repaint();
+	}
+
+	public void setBounds(int x, int y, int width, int height) {
+		super.setBounds(x, y, width, height);
 		repaint();
 	}
 
@@ -93,6 +99,10 @@ public abstract class BJPanel extends JPanel {
 
 	public void setBordersize(int bordersize) {
 		this.bordersize = bordersize;
+	}
+
+	public void setLayout(LayoutManager layout) {
+		super.setLayout(layout);
 	}
 
 	public Component add(Component c) {

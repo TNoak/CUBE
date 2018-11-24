@@ -11,11 +11,13 @@ import java.awt.geom.Rectangle2D;
 import cube.STATICS.COLORS;
 import cube.WIDGETS.BJPanel;
 import cube.WIDGETS.CButton;
+import cube.WIDGETS.CText;
 
 public class CONTROLLPANEL_OUTDOOR extends BJPanel {
 
 	CButton control;
 	private int temperature;
+	CText text1, text2;
 
 	public CONTROLLPANEL_OUTDOOR(int x, int y, int width, int height, Color background, Color border, int roundness) {
 		super();
@@ -26,39 +28,21 @@ public class CONTROLLPANEL_OUTDOOR extends BJPanel {
 		super.setBordersize(1);
 		super.setRoundness(roundness);
 
-	}
-
-	public void paintComponent(Graphics graphics) {
-		super.paintComponent(graphics);
-		Graphics2D g = (Graphics2D) graphics.create();
-		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
-		g.setColor(COLORS.white);
-
-		Font f = new Font("Arial", Font.BOLD, 16);
-		g.setFont(f);
-		FontMetrics m = g.getFontMetrics(g.getFont());
-		Rectangle2D r = m.getStringBounds("Outdoor Temp.", g);
-		g.drawString("Outdoor Temp.", (int) (super.getWidth() - r.getWidth()) / 2, 10 + (int) r.getHeight() / 2);
-
-		Font f2 = new Font("Arial", Font.BOLD, 20);
-		g.setFont(f2);
-		FontMetrics m2 = g.getFontMetrics(g.getFont());
-		Rectangle2D r2 = m2.getStringBounds(Integer.toString(temperature) + "°C", g);
-		g.drawString(Integer.toString(temperature/100) +","+Integer.toString(temperature-temperature/100*100)+ "°C", (int) (super.getWidth() - r2.getWidth()) / 2,
-				super.getHeight() / 2 + (int) r2.getHeight() / 2);
-
+		text1 = new CText(10, 10, width - 20, height / 2 - 20, "Outdoor Temp.");
+		super.add(text1);
+		text2 = new CText(super.getWidth()/4, super.getHeight() / 2, super.getWidth()/2, super.getHeight() / 2 - 20, "--,-°C");
+		super.add(text2);
 	}
 
 	public void setTemp(int temperature) {
 		this.temperature = temperature;
+		text2.setText(Integer.toString(temperature / 100) + ","
+				+ Integer.toString(temperature - temperature / 100 * 100) + "°C");
 		repaint();
 	}
 
 	public int getTemp() {
 		return temperature;
 	}
-	
-	
 
 }

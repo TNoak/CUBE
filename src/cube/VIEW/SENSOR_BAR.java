@@ -11,12 +11,14 @@ import java.awt.geom.Rectangle2D;
 import cube.STATICS.COLORS;
 import cube.WIDGETS.BJPanel;
 import cube.WIDGETS.CBar;
+import cube.WIDGETS.CText;
 
 public class SENSOR_BAR extends BJPanel {
 
 	private int sensortype;
 	private int data;
 	CBar cb;
+	CText ct;
 
 	public SENSOR_BAR(int x, int y, int width, int height, int roundness, Color foreground, Color border,
 			int sensortype) {
@@ -27,41 +29,24 @@ public class SENSOR_BAR extends BJPanel {
 		super.setBordercolor(border);
 		super.setBordersize(1);
 		super.setRoundness(roundness);
+		super.setLayout(null);
+		super.setVisible(true);
 
 		this.sensortype = sensortype;
 
 		if (sensortype == 1) {
 			cb = new CBar(30, super.getHeight() / 2, super.getWidth() - 60, 20, 20, COLORS.temp, COLORS.temp2);
 			super.add(cb);
+
+			ct = new CText(10, 5, super.getWidth() - 20, super.getHeight() / 2 - 10, "Temperature: --,-°C");
+			super.add(ct);
 		} else {
 			cb = new CBar(30, super.getHeight() / 2, super.getWidth() - 60, 20, 20, COLORS.humid, COLORS.humid2);
 			super.add(cb);
-		}
-	}
 
-	public void paintComponent(Graphics graphics) {
-		super.paintComponent(graphics);
-		Graphics2D g = (Graphics2D) graphics.create();
-		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		if (sensortype == 1) {
-			g.setColor(COLORS.white);
-			Font f = new Font("Arial", Font.BOLD, 20);
-			g.setFont(f);
-			FontMetrics m = g.getFontMetrics(g.getFont());
-			Rectangle2D r = m.getStringBounds("Temperature: __,_°C", g);
-			g.drawString("Temperature: " + Integer.toString(data / 10) + "," + Integer.toString(data - data / 10 * 10)
-					+ "°C", (int) (super.getWidth() - r.getWidth()) / 2, 30);
-
-		} else {
-			g.setColor(COLORS.white);
-			Font f = new Font("Arial", Font.BOLD, 20);
-			g.setFont(f);
-			FontMetrics m = g.getFontMetrics(g.getFont());
-			Rectangle2D r = m.getStringBounds("Humidity: ___,_%", g);
-			g.drawString(
-					"Humidity: " + Integer.toString(data / 10) + "," + Integer.toString(data - data / 10 * 10) + "%",
-					(int) (super.getWidth() - r.getWidth()) / 2, 30);
-
+			ct = new CText(10, 5, super.getWidth() - 20, super.getHeight() / 2 - 10, "Humidity: --,-%");
+			super.add(ct);
+		
 		}
 	}
 
@@ -69,10 +54,13 @@ public class SENSOR_BAR extends BJPanel {
 		this.data = data;
 		if (sensortype == 2) {
 			cb.setLevel((double) data / 1000);
+			ct.setText("Temperature: " + Integer.toString(data / 10) + "," + Integer.toString(data - data / 10 * 10)
+					+ "°C");
 		} else {
 			cb.setLevel((double) data / 350);
+			ct.setText(
+					"Humidity: " + Integer.toString(data / 10) + "," + Integer.toString(data - data / 10 * 10) + "%");
 		}
-		repaint();
 	}
 
 }

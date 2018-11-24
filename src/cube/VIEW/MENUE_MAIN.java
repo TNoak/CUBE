@@ -1,12 +1,13 @@
 package cube.VIEW;
 
-import java.awt.Color;
-
 import javax.swing.JPanel;
 
 import cube.STATICS.COLORS;
+import cube.WIDGETS.CButton;
 
 public class MENUE_MAIN extends JPanel {
+
+	CButton load, save;
 
 	public MENUE_MAIN(int width, int height) {
 		super();
@@ -15,5 +16,6 @@ public class MENUE_MAIN extends JPanel {
 		super.setLayout(null);
 		super.setVisible(true);
 
+		
 	}
 }
