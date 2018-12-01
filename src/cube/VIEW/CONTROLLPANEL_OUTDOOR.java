@@ -1,3 +1,4 @@
+
 package cube.VIEW;
 
 import java.awt.Color;
@@ -30,19 +31,20 @@ public class CONTROLLPANEL_OUTDOOR extends BJPanel {
 
 		text1 = new CText(10, 10, width - 20, height / 2 - 20, "Outdoor Temp.");
 		super.add(text1);
-		text2 = new CText(super.getWidth()/4, super.getHeight() / 2, super.getWidth()/2, super.getHeight() / 2 - 20, "--,-°C");
+		text2 = new CText(super.getWidth()/4, super.getHeight() / 2, super.getWidth()/2, super.getHeight() / 2 - 20, "--,-ï¿½C");
 		super.add(text2);
 	}
 
 	public void setTemp(int temperature) {
 		this.temperature = temperature;
 		text2.setText(Integer.toString(temperature / 100) + ","
-				+ Integer.toString(temperature - temperature / 100 * 100) + "°C");
+				+ Integer.toString(temperature - temperature / 100 * 100) + "ï¿½C");
 		repaint();
 	}
 
 	public int getTemp() {
 		return temperature;
 	}
+
 
 }

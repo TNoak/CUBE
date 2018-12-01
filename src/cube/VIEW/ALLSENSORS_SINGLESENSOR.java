@@ -1,3 +1,4 @@
+
 package cube.VIEW;
 
 import java.awt.Color;
@@ -59,3 +60,4 @@ public class ALLSENSORS_SINGLESENSOR extends BJPanel {
 	}
 
 }
+

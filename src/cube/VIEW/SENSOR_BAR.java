@@ -1,3 +1,4 @@
+
 package cube.VIEW;
 
 import java.awt.Color;
@@ -36,7 +37,7 @@ public class SENSOR_BAR extends BJPanel {
 			cb = new CBar(30, super.getHeight() / 2, super.getWidth() - 60, 20, 20, COLORS.temp, COLORS.temp2);
 			super.add(cb);
 
-			ct = new CText(10, 5, super.getWidth() - 20, super.getHeight() / 2 - 10, "Temperature: --,-°C");
+			ct = new CText(10, 5, super.getWidth() - 20, super.getHeight() / 2 - 10, "Temperature: --,-ï¿½C");
 			super.add(ct);
 		} else {
 			cb = new CBar(30, super.getHeight() / 2, super.getWidth() - 60, 20, 20, COLORS.humid, COLORS.humid2);
@@ -52,7 +53,7 @@ public class SENSOR_BAR extends BJPanel {
 		if (sensortype == 2) {
 			cb.setLevel((double) data / 1000);
 			ct.setText("Temperature: " + Integer.toString(data / 10) + "," + Integer.toString(data - data / 10 * 10)
-					+ "°C");
+					+ "ï¿½C");
 		} else {
 			cb.setLevel((double) data / 350);
 			ct.setText(
@@ -61,3 +62,4 @@ public class SENSOR_BAR extends BJPanel {
 	}
 
 }
+

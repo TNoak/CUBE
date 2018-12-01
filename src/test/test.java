@@ -1,5 +1,6 @@
 package test;
 
+
 import java.awt.BorderLayout;
 import java.awt.Container;
 
@@ -17,7 +18,7 @@ public class test extends JDialog {
 		super.setBounds(0, 0, 200, 200);
 		super.setVisible(true);
 
-		l = new JLabel("bvhdsbvjbavlkabvcj w hvnkbvwbcqbvkä");
+		l = new JLabel("bvhdsbvjbavlkabvcj w hvnkbvwbcqbvkï¿½");
 		l.setBounds(0, 0, 200, 200);
 		l.setVisible(true);
 		super.add(l);
@@ -33,6 +34,7 @@ public class test extends JDialog {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		new test();
+
 	}
 
 }

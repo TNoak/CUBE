@@ -1,3 +1,4 @@
+
 package cube.WIDGETS;
 
 import java.awt.BasicStroke;
@@ -141,3 +142,4 @@ public class CButton extends JButton {
 		this.text = text;
 	}
 }
+

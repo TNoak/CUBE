@@ -1,3 +1,4 @@
+
 package cube.VIEW;
 
 import javax.swing.JPanel;
@@ -23,3 +24,4 @@ public class MENUE_MAIN extends JPanel {
 		super.add(save);
 	}
 }
+

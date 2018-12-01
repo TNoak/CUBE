@@ -28,6 +28,7 @@ public class CGraph extends JPanel {
 
 		this.sensortype = sensortype;
 
+
 		data = new int[1];
 	}
 
@@ -46,8 +47,8 @@ public class CGraph extends JPanel {
 			g.setColor(Color.WHITE);
 			Font f = new Font("Arial", Font.PLAIN, 9);
 			g.setFont(f);
-			g.drawString("0°C", 2, super.getHeight());
-			g.drawString("35°C", 2, 9);
+			g.drawString("0Â°C", 2, super.getHeight());
+			g.drawString("35Â°C", 2, 9);
 
 		} else {
 			g.setColor(Color.WHITE);

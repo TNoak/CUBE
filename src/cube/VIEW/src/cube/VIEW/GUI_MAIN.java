@@ -99,5 +99,7 @@ public class GUI_MAIN extends JFrame {
 		new GUI_MAIN(15, 10);
 	}
 
-	//wow 35 Seiten Code inzwischen und mehr Wörter(über 4250 Wörter und 39000 Zeichen) als meine Seminararbeit...
+
+	//wow 35 Seiten Code inzwischen und mehr Wï¿½rter(ï¿½ber 4250 Wï¿½rter und 39000 Zeichen) als meine Seminararbeit...
+
 }

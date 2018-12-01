@@ -1,3 +1,4 @@
+
 package cube.VIEW;
 
 import java.awt.Color;
@@ -53,5 +54,6 @@ public class SENSOR_STATUS extends BJPanel {
 	public int getStatus() {
 		return status;
 	}
+
 
 }

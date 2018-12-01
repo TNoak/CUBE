@@ -1,3 +1,4 @@
+
 package cube.WIDGETS;
 
 import java.awt.BasicStroke;
@@ -107,3 +108,4 @@ public abstract class BJPanel extends JPanel {
 	}
 
 }
+

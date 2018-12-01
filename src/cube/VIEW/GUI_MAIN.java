@@ -1,3 +1,4 @@
+
 package cube.VIEW;
 
 import javax.swing.JFrame;

@@ -1,3 +1,4 @@
+
 package cube.WIDGETS;
 
 import java.awt.Color;
@@ -55,8 +56,8 @@ public class CBar extends JLabel {
 		g.fillRoundRect(0, 0, width, height, roundness, roundness);
 
 		g.setColor(color);
-		g.fillRoundRect(0, 0, pixellevel, height, roundness, roundness); // x, y müssen 0 sein da sonst das gezeichnete
-																			// sont außerhalb des Buttons liegt
+		g.fillRoundRect(0, 0, pixellevel, height, roundness, roundness); // x, y mï¿½ssen 0 sein da sonst das gezeichnete
+																			// sont auï¿½erhalb des Buttons liegt
 
 	}
 
@@ -121,3 +122,4 @@ public class CBar extends JLabel {
 	}
 
 }
+
