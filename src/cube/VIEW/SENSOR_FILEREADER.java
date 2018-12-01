@@ -14,10 +14,7 @@ public class SENSOR_FILEREADER {
 	FileReader fr;
 	BufferedReader reader;
 
-	String file;
-	
 	public SENSOR_FILEREADER(String file) {
-		this.file=file;
 		try {
 			pWriter = new PrintWriter(new BufferedWriter(new FileWriter(file+".txt")));
 		} catch (IOException e1) {
@@ -32,8 +29,15 @@ public class SENSOR_FILEREADER {
 			e.printStackTrace();
 		}
 		reader = new BufferedReader(fr);
-		writeData(0, 0, 0);
 		
+		pWriter.println(file+"_0_0_0");
+		/*
+		pWriter.println(file+"_1_111_600");
+		pWriter.println(file+"_2_200_600");
+		pWriter.println(file+"_3_220_550");
+		pWriter.println(file+"_4_310_650");
+		pWriter.println(file+"_5_301_400");
+		pWriter.println(file+"_6_280_300"); */
 		pWriter.flush();
 
 	}
@@ -50,11 +54,6 @@ public class SENSOR_FILEREADER {
 
 	public String[] updateData() {
 		return read().split(Pattern.quote("_"));
-	}
-	
-	public void writeData(int tick,int temp,int humid) {
-		pWriter.println(file+"_"+tick+"_"+temp+"_"+humid);
-		pWriter.flush();
 	}
 
 }

@@ -12,7 +12,7 @@ public class SENSOR_GRAPH extends BJPanel {
 	CGraph graph;
 
 	public SENSOR_GRAPH(int x, int y, int width, int height, int roundness, Color foreground, Color border,
-			int sensortype,int time) {
+			int sensortype) {
 		super();
 		super.setSize(width, height);
 		super.setLocation(x, y);
@@ -27,17 +27,11 @@ public class SENSOR_GRAPH extends BJPanel {
 		graph.setSize(super.getWidth()-40,super.getHeight()-40);
 		graph.setLocation(20,20);
 		super.add(graph);
-		
-		setTime(time);
 	}
 	
 	
 	public void setData(int[] data) {
 		graph.setData(data);
-	}
-	
-	public void setTime(int time) {
-		graph.setTime(time);
 	}
 
 }
