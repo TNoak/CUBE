@@ -39,9 +39,7 @@ public class CBar extends JLabel {
 
 	}
 
-
-	void generatePixelLevel(double level, int lenght) {//level in %
-
+	void generatePixelLevel(double level, int lenght) {
 		pixellevel = (int) (lenght * level);
 	}
 
@@ -57,8 +55,8 @@ public class CBar extends JLabel {
 		g.fillRoundRect(0, 0, width, height, roundness, roundness);
 
 		g.setColor(color);
-		g.fillRoundRect(0, 0, pixellevel, height, roundness, roundness); // x, y m√ºssen 0 sein da sonst das gezeichnete
-																			// sont au√üerhalb des Buttons liegt
+		g.fillRoundRect(0, 0, pixellevel, height, roundness, roundness); // x, y m¸ssen 0 sein da sonst das gezeichnete
+																			// sont auﬂerhalb des Buttons liegt
 
 	}
 

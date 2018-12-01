@@ -63,19 +63,12 @@ public class CButton extends JButton {
 		g.setColor(COLORS.white);
 
 		if (text != "exit") {
-
-			for (int x = 40; x > 5; x--) {
-				Font f = new Font("Arial", Font.BOLD, x);
-				g.setFont(f);
-				FontMetrics m = g.getFontMetrics(g.getFont());
-				Rectangle2D r = m.getStringBounds(text, g);
-
-				if (r.getWidth() < ((this.getWidth()/3)*2) && r.getHeight() < ((this.getHeight()/2)*3)) {
-					g.drawString(text, (int) (super.getWidth()-r.getWidth())/2, (int) (this.getHeight()+r.getHeight())/2-5);
-					break;
-				}
-			}
-
+			Font f = new Font("Arial", Font.BOLD, 20);
+			g.setFont(f);
+			FontMetrics m = g.getFontMetrics(g.getFont());
+			Rectangle2D r = m.getStringBounds(getText(), g);
+			g.drawString(getText(), (int) (super.getWidth() - r.getWidth()) / 2,
+					(int) ((super.getHeight() + r.getHeight()) / 2));
 		} else {
 			g.setStroke(new BasicStroke(4));
 			g.drawLine(roundness, roundness, getWidth()-roundness, getHeight()-roundness);
