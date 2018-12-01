@@ -1,3 +1,4 @@
+
 package cube.VIEW;
 
 import javax.swing.JFrame;
@@ -60,3 +61,4 @@ public class GUI_MAIN extends JFrame {
 		new GUI_MAIN(10);
 	}
 }
+

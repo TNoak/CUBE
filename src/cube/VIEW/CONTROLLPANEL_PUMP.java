@@ -1,3 +1,4 @@
+
 package cube.VIEW;
 
 import java.awt.Color;
@@ -45,9 +46,9 @@ public class CONTROLLPANEL_PUMP extends BJPanel {
 
 		g.setFont(f);
 		g.drawString("Flow IN: " + Integer.toString(flowin / 100) + "," + Integer.toString(flowin - flowin / 100 * 100)
-				+ "°C", 10, super.getHeight() / 5 * 3);
+				+ "ï¿½C", 10, super.getHeight() / 5 * 3);
 		g.drawString("Flow OUT: " + Integer.toString(flowout / 100) + ","
-				+ Integer.toString(flowout - flowout / 100 * 100) + "°C", 10, super.getHeight() / 5 * 4);
+				+ Integer.toString(flowout - flowout / 100 * 100) + "ï¿½C", 10, super.getHeight() / 5 * 4);
 	}
 
 	public void setFlowIn(int flowin) {
@@ -64,3 +65,4 @@ public class CONTROLLPANEL_PUMP extends BJPanel {
 		return control;
 	}
 }
+

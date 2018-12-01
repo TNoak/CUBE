@@ -1,3 +1,4 @@
+
 package cube.VIEW;
 
 import java.awt.Color;
@@ -56,3 +57,4 @@ public class ALLSENSORS_MAIN extends BJPanel implements ActionListener{
 		}
 	}
 }
+

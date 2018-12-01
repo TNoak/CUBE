@@ -1,3 +1,4 @@
+
 package cube.VIEW;
 
 import java.awt.Color;
@@ -46,8 +47,8 @@ public class CONTROLLPANEL_OUTDOOR extends BJPanel {
 		Font f2 = new Font("Arial", Font.BOLD, 20);
 		g.setFont(f2);
 		FontMetrics m2 = g.getFontMetrics(g.getFont());
-		Rectangle2D r2 = m2.getStringBounds(Integer.toString(temperature) + "°C", g);
-		g.drawString(Integer.toString(temperature/100) +","+Integer.toString(temperature-temperature/100*100)+ "°C", (int) (super.getWidth() - r2.getWidth()) / 2,
+		Rectangle2D r2 = m2.getStringBounds(Integer.toString(temperature) + "ï¿½C", g);
+		g.drawString(Integer.toString(temperature/100) +","+Integer.toString(temperature-temperature/100*100)+ "ï¿½C", (int) (super.getWidth() - r2.getWidth()) / 2,
 				super.getHeight() / 2 + (int) r2.getHeight() / 2);
 
 	}
@@ -61,5 +62,6 @@ public class CONTROLLPANEL_OUTDOOR extends BJPanel {
 	public int getTemp() {
 		return temperature;
 	}
+
 
 }

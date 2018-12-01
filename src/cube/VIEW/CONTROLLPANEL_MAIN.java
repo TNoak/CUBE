@@ -1,3 +1,4 @@
+
 package cube.VIEW;
 
 import java.awt.Color;
@@ -99,3 +100,4 @@ public class CONTROLLPANEL_MAIN extends BJPanel implements ActionListener {
 	}
 
 }
+
